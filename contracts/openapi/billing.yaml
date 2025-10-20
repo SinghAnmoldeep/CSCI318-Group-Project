@@ -1,0 +1,38 @@
+openapi: 3.0.3
+info: { title: Billing API, version: 1.0.0 }
+paths:
+  /api/invoices:
+    post:
+      summary: Create invoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/InvoiceCreate' }
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/Invoice' } } } }
+  /api/payments:
+    post:
+      summary: Record payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PaymentCreate' }
+      responses:
+        '200': { description: OK }
+components:
+  schemas:
+    InvoiceCreate:
+      type: object
+      required: [appointmentId, amount]
+      properties: { appointmentId: { type: integer }, amount: { type: number } }
+    Invoice:
+      allOf:
+        - $ref: '#/components/schemas/InvoiceCreate'
+        - type: object
+          properties: { id: { type: string, format: uuid }, status: { type: string } }
+    PaymentCreate:
+      type: object
+      required: [invoiceId, amount]
+      properties: { invoiceId: { type: string, format: uuid }, amount: { type: number } }

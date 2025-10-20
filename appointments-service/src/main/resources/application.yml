@@ -1,0 +1,16 @@
+server: { port: 8081 }
+spring:
+  datasource:
+    url: jdbc:h2:mem:appointments;DB_CLOSE_DELAY=-1
+    driverClassName: org.h2.Driver
+    username: sa
+  jpa:
+    hibernate: { ddl-auto: update }
+  cloud:
+    stream:
+      defaultBinder: kafka
+      bindings:
+        appointmentCreated-out-0: { destination: appointment.created }
+        appointmentStatusChanged-out-0: { destination: appointment.status.changed }
+      kafka:
+        binder: { brokers: localhost:9092 }

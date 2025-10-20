@@ -1,0 +1,131 @@
+{
+  "info": {
+    "name": "CSCI318",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8083/api/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8083",
+          "path": [
+            "api",
+            "users"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\": \"p1@example.com\", \"role\": \"PATIENT\"}"
+        }
+      }
+    },
+    {
+      "name": "Create Appointment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8081/api/appointments",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "appointments"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"patientId\": \"p-001\", \"clinicianId\": \"c-101\", \"startTime\": \"2025-10-06T10:30:00Z\"}"
+        }
+      }
+    },
+    {
+      "name": "Confirm Appointment",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://localhost:8081/api/appointments/1/confirm",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "appointments",
+            "1",
+            "confirm"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Invoice",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8082/api/invoices",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "invoices"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"appointmentId\": 1, \"amount\": 120.0}"
+        }
+      }
+    },
+    {
+      "name": "Status Counts",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8086/api/analytics/status-counts",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8086",
+          "path": [
+            "api",
+            "analytics",
+            "status-counts"
+          ]
+        }
+      }
+    }
+  ]
+}

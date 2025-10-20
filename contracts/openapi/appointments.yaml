@@ -1,0 +1,47 @@
+openapi: 3.0.3
+info: { title: Appointments API, version: 1.0.0 }
+paths:
+  /api/appointments:
+    post:
+      summary: Create appointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/AppointmentCreate' }
+      responses:
+        '200':
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Appointment' }
+  /api/appointments/{id}/confirm:
+    post:
+      summary: Confirm appointment
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: integer, format: int64 }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Appointment' }
+components:
+  schemas:
+    AppointmentCreate:
+      type: object
+      required: [patientId, clinicianId, startTime]
+      properties:
+        patientId: { type: string }
+        clinicianId: { type: string }
+        startTime: { type: string, format: date-time }
+    Appointment:
+      allOf:
+        - $ref: '#/components/schemas/AppointmentCreate'
+        - type: object
+          properties:
+            id: { type: integer, format: int64 }
+            status: { type: string, enum: [CREATED, CONFIRMED, CANCELLED] }

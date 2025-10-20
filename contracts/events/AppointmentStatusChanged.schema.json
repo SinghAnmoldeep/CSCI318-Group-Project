@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AppointmentStatusChangedEvent",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "newStatus": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "newStatus"
+  ]
+}

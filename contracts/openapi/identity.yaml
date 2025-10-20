@@ -1,0 +1,24 @@
+openapi: 3.0.3
+info: { title: Identity API, version: 1.0.0 }
+paths:
+  /api/users:
+    post:
+      summary: Create user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/UserCreate' }
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/User' } } } }
+components:
+  schemas:
+    UserCreate:
+      type: object
+      required: [email, role]
+      properties: { email: { type: string }, role: { type: string } }
+    User:
+      allOf:
+        - $ref: '#/components/schemas/UserCreate'
+        - type: object
+          properties: { id: { type: string, format: uuid } }

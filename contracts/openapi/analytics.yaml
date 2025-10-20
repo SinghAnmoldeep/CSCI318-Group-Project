@@ -1,0 +1,14 @@
+openapi: 3.0.3
+info: { title: Analytics API, version: 1.0.0 }
+paths:
+  /api/analytics/status-counts:
+    get:
+      summary: Current appointment counts by status
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: { type: integer }
